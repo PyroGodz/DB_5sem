@@ -1,0 +1,19 @@
+drop database link testLink;
+
+create database link testLink
+connect to system identified by "123456"
+using '172.20.10.7:1521/orcl';
+
+create table t1;
+insert into t1@testLink(id) values(9);
+select * from t1@testLink;
+update t1 set n3 = 10;
+drop table t1@testLink;
+delete table t1@testLink;
+
+
+drop database link testLink2;
+create public database link testLink2
+using '172.20.10.7:1521/orcl';
+
+select * from t1@testLink2;
